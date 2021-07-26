@@ -199,10 +199,7 @@
   
 
   {{ 'jquery-2.2.3.min.js' | asset_url | script_tag }}
-  
-  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
   
 <!-- Begin Shopify-Afterpay JavaScript Snippet (v1.0.8) -->
 <script type="text/javascript" async="async">
@@ -229,15 +226,11 @@ var afterpay_js_snippet_version = '1.0.8';
 <script type="text/javascript" src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
 <!-- End Shopify-Afterpay JavaScript Snippet (v1.0.8) -->
 
-  
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
-
-
+  
   {{ 'theme.js' | asset_url | script_tag }}
   
-  
-
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
