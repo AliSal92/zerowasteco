@@ -1,0 +1,246 @@
+<!doctype html>
+<html class="no-js">
+<head>
+
+  <meta name="google-site-verification" content="X7RHcptAH5GwY1ksEKUXMSgGvZE8PT_MCTXBWCpDwbs" />
+  
+  
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  {% if settings.favicon %}
+  <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {% endif %}
+
+  <!-- Title and description ================================================== -->
+  <title>
+  {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <!-- Social meta ================================================== -->
+  {% include 'social-meta-tags' %}
+
+  <!-- Helpers ================================================== -->
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+
+  <script>
+    window.theme = window.theme || {};
+
+    var theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        zoomClose: {{ "products.zoom.close" | t | json }},
+        zoomPrev: {{ "products.zoom.prev" | t | json }},
+        zoomNext: {{ "products.zoom.next" | t | json }},
+        addressError: {{ 'map.errors.address_error' | t | json }},
+        addressNoResults: {{ 'map.errors.address_no_results' | t | json }},
+        addressQueryLimit: {{ 'map.errors.address_query_limit_html' | t | json }},
+        authError: {{ 'map.errors.auth_error_html' | t | json }}
+      },
+      settings: {
+        // Adding some settings to allow the editor to update correctly when they are changed
+        enableWideLayout: {{ settings.enable_wide_layout }},
+        typeAccentTransform: {{ settings.type_accent_transform }},
+        typeAccentSpacing: {{ settings.type_accent_spacing }},
+        baseFontSize: '{{ settings.type_base_size }}',
+        headerBaseFontSize: '{{ settings.type_header_size }}',
+        accentFontSize: '{{ settings.type_accent_size }}'
+      },
+      variables: {
+        mediaQueryMedium: 'screen and (max-width: 768px)',
+        bpSmall: false
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    }
+
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'supports-js');
+  </script>
+
+	
+
+
+  <script src="{{ 'lazysizes.min.js' | asset_url }}" async="async"></script>
+
+  {% comment %}
+    If you store has customer accounts disabled, you can remove the following JS file
+  {% endcomment %}
+  {% if request.page_type contains 'customers/' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  {% include 'qikify-navigator' %}
+  
+  
+  {% render 'vitals-loader' %}
+ 
+{% include 'pagefly-header' %}
+   {% include 'qikify-smartmenu' %}
+{% if template contains 'product' %}
+  <link rel="amphtml" href="//{{shop.domain}}/apps/fireamp/products/{{product.handle}}" >
+{% endif %}
+{% if template contains 'collection' %}
+  {% assign collectionpageurl = content_for_header| split:'"pageurl":"' | last | split:'"' | first %}
+  {% assign collectionHandle = collectionpageurl | split : "collections\/" | last %}
+  {% if collectionpageurl contains '?' or collectionHandle contains '/' %}
+  {% else %}
+  <link rel="amphtml" href="//{{shop.domain}}/apps/fireamp/collections/{{collection.handle}}" >
+  {% endif %}
+{% endif %}
+{% if template contains 'blog' %}  
+  <link rel="amphtml" href="//{{shop.domain}}/apps/fireamp/blogs/{{blog.handle}}" >
+{% endif %}
+{% if template contains 'article' %}
+  <link rel="amphtml" href="//{{shop.domain}}/apps/fireamp/blogs/{{article.handle}}" >
+{% endif %}
+  
+
+<!-- Global site tag (gtag.js) - Google Ads: 775548587 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-775548587"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-775548587');
+</script>
+
+
+  
+  <script src="https://apis.google.com/js/platform.js?onload=renderBadge" async defer></script>
+  
+  <style>
+    *,:after,:before,input{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}body,html{padding:0;margin:0}header,main,nav{display:block}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}html{background-color:#014a05}body{background-color:#fff}.wrapper{max-width:1340px;margin:0 auto;padding:0 15px}.wrapper:after{content:"";display:table;clear:both}@media screen and (min-width:480px){.wrapper{padding:0 30px}}.main-content{display:block;margin-top:60px;padding-bottom:60px}body,button,input{font-size:17px;line-height:1.7;font-family:Montserrat,sans-serif;font-weight:400;font-style:normal;color:#014a05;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}h1,h2,h3,h4{font-family:Montserrat,sans-serif;font-weight:500;font-style:normal;margin:0 0 15px;line-height:1.4}h1 a{text-decoration:none;font-weight:inherit}h1{font-size:2.11765em}h2{font-size:1.64706em}h3{font-size:1.41176em}h4{font-size:1.05882em}p{margin:0 0 15px 0}ul{margin:0 0 30px;padding:0}ul{list-style:none outside}ul ul{margin:4px 0 5px 20px}li{margin-bottom:.25em}.grid--full:after,.grid:after{content:"";display:table;clear:both}.grid,.grid--full{list-style:none;margin:0;padding:0;margin-left:-30px}.grid__item{float:left;min-height:1px;padding-left:30px;vertical-align:top;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.grid--full{margin-left:0}.grid--full>.grid__item{padding-left:0}@media only screen and (max-width:768px){.medium-down--hide{display:none!important}}@media only screen and (min-width:769px){.post-large--one-quarter{width:25%}.post-large--hide{display:none!important}}.clearfix:after{content:"";display:table;clear:both}@media screen and (min-width:769px){.post-large--display-table{display:table;table-layout:fixed;width:100%}.post-large--display-table-cell{display:table-cell;vertical-align:middle;float:none}}.visually-hidden{clip:rect(0 0 0 0);clip:rect(0,0,0,0);overflow:hidden;position:absolute;height:1px;width:1px}.no-js .supports-js{display:none!important}a{color:#00a8f3;text-decoration:none;background:0 0}button{overflow:visible}.btn{display:inline-block;padding:8px 16px;margin:0;margin-top:5px;font-size:.94118em;font-family:Montserrat,sans-serif;font-weight:600;font-style:normal;line-height:1.8;text-decoration:none;text-align:center;vertical-align:middle;min-height:44px;white-space:nowrap;border:1px solid transparent;-webkit-appearance:none;-moz-appearance:none;border-radius:20px!important;background-color:#00a8f3;color:#fff}.btn--search{min-height:auto;line-height:1.42}img{border:0 none}.grid__item img{max-width:100%}form{margin-bottom:30px}button,input{font-size:1em}button,input[type=search]{-webkit-appearance:none;-moz-appearance:none}input{border-radius:2px;max-width:100%}input{padding:8px 10px;line-height:1.42}input{display:inline-block;width:auto}input[type=search]{border:1px solid rgba(1,74,5,.15);width:100%;max-width:100%;display:block;margin:0 0 1em;color:#333}label{display:block;margin-bottom:2px}.icon-fallback-text .icon{display:none}.icon:before{display:none}.icon-cart:before{content:"\5b"}.icon-facebook:before{content:"\66"}.icon-hamburger:before{content:"\e600"}.icon-instagram:before{content:"\e903"}.icon-minus:before{content:"\e602"}.icon-pinterest:before{content:"\70"}.icon-plus:before{content:"\e605"}.icon-search:before{content:"\73"}.icon-twitter:before{content:"\54"}.icon-youtube:before{content:"\79"}.social-icons li .icon{font-size:22px;line-height:22px}.site-header{padding:40px 0;background-color:transparent}@media screen and (min-width:769px){.site-header{padding:30px 0}.site-header .post-large--display-table{min-height:86px}}@media screen and (min-width:769px){.site-header .grid--full{display:table;table-layout:fixed;width:100%}.site-header .grid--full>.grid__item{float:none;display:table-cell;vertical-align:middle}}.site-header__logo{text-align:center;margin:0 auto;max-width:100%}.site-header__logo a{color:#014a05;margin:0 auto}.site-header__logo a{text-decoration:none}.site-header__logo a,.site-header__logo img{display:block}.site-header__logo img{margin:0 auto}.logo__image-wrapper{display:block;max-width:100%;position:relative}.logo__image{width:100%;display:block}.supports-js .logo__image{width:100%;position:absolute;top:0;left:0}.no-js .logo__image{clip:rect(0 0 0 0);clip:rect(0,0,0,0);overflow:hidden;position:absolute;height:1px;width:1px}.site-nav{font-size:.94118em;font-family:Montserrat,sans-serif;font-weight:600;font-style:normal;margin:0 auto;text-align:center}.site-nav__link{display:block;text-decoration:none;white-space:nowrap;color:#014a05;background-color:#fff;font-weight:600;padding:7px 20px 7px 15px}@font-face{font-display: swap;font-family:Montserrat;font-weight:600;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.7a3c341961dc23aaabcc116124b80f2a7abec1a2.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=4a866e90ac97806865e3afff99056f4746d6adf401165e070537e1216dc0ae51") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_n6.2c97c1a692c63ad09ab0635cb73b1939c5f417c0.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=fcd258a487152906bdab5af883ec15f90f0427d578fccee0eb41e61a1c7ef651") format("woff")}@font-face{font-display: swap;font-family:Montserrat;font-weight:400;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.1d581f6d4bf1a97f4cbc0b88b933bc136d38d178.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=f34d6adcf61dd24d3f7e4aa2bbf06b781376c39d434285eed859f124b783d978") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_n4.cfce41a967758ce5a9b7d48daeb5b028fd977a9b.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=92a7b31b85893be6e161cb00f55265ed5a5cec63758c6f9457b4f62cf96f1dc3") format("woff")}@font-face{font-display: swap;font-family:Montserrat;font-weight:500;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n5.e72d00d31ae5399d260a80ec70322c62c1819762.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=31946613747013a1870f66cd8197bb4e01892bf8dc17dacb9ce06aa75a4c6aac") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_n5.18a018b6c83e89030c5d70a6d4c02c969f228500.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=8c89a9349f97adc264bbfdd1dfe0e46b1234bf8aafa658325dd6fe7cdc4cdcfb") format("woff")}@font-face{font-display: swap;font-family:Montserrat;font-weight:700;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n7.c496e9cf2031deec4c4bca338faa81971c8631d4.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=4291fc3ff3f9ef009d35291065acc869f1a98fec8b4e9d4cd7d812cf15d7bb44") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_n7.78b0223375c94b39ce1af7e09a0225f2bb3d05f7.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=cac9877d069b5f9b3a103a33fc10d2eb5e623ff119589256f33763dc25c439ea") format("woff")}@font-face{font-display: swap;font-family:Montserrat;font-weight:400;font-style:italic;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_i4.ae02483b3d5e8777d0d4a4ccf396482c364d8955.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=7955941123c15c261188e3ebb9897cbf858bbf44efaa693e41350d8cb8230a3e") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_i4.ba28d1a04ec09448de486d83c63235903dfc0af8.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=3e69ce63331638f24cbafafc722622b75b2a9dfe88ec4b3bb8ed22ee892bb026") format("woff")}@font-face{font-display: swap;font-family:Montserrat;font-weight:700;font-style:italic;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_i7.83866c3eec90071fa974c17980ffb42977f9e667.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=95fe87869d6c6fd4caff9c6639c666cde922a47d337beeb4628af7e54d20792d") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_i7.25524241b12d864609c85325613d60efcf1a87e3.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=86d73539859e7f24efd16d4cecb8d4f1d8c8e0003361616b043be0e7ec3671b0") format("woff")}@font-face{font-display: swap;font-family:Montserrat;font-weight:900;font-style:normal;src:url("https://fonts.shopifycdn.com/montserrat/montserrat_n9.ddaed62de62f3d3d87e64f4d0463dca05fc9c8e4.woff2?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=d3b78546dcee70eb7b4cd2bca211b12a2799484640aebeddbc280aeb9c1426ec") format("woff2"),url("https://fonts.shopifycdn.com/montserrat/montserrat_n9.85cc5f32e331fc9b3a109639b08869c64782e161.woff?h1=YXVzdHJhZGVycy5jb20&h2=YXVzdHJhZGVycy5jb20uYXU&h3=emVyb3dhc3RlY28uY29tLmF1&h4=emVyb3dhc3RlY28uZWNv&h5=emVyb3BhY2thZ2luZy5jb20uYXU&h6=emVyb3BhY2suY29tLmF1&h7=emVyb3BhY2thZ2luZy5jbw&hmac=a3c5bf0147bd980d0b5ff2766cdc1d27eb6bdec2670fa510fb2f5f78691597d5") format("woff")}button::-moz-focus-inner{padding:0;border:0}h1{font-size:1.88235em;color:#02662f;line-height:1.2}h2{font-size:1.47059em;color:#0b9547;line-height:1.3}h3{font-size:1.29412em;color:#0b9547;line-height:1.4}h4{font-size:.94118em;color:#0b9547;line-height:1.6}h4{font-size:.94118em;color:#0b9547;font-weight:700}.main-content{margin-top:15px}.template-index .main-content{margin-top:0}body,html{background:#fff}.header-bar{font-family:Montserrat,sans-serif;font-size:1.05882em;font-weight:600;font-style:normal;background-color:#83b925;color:#ecf6ed;padding-top:2px;padding-bottom:2px;text-align:center}.header-bar:after{content:"";display:table;clear:both}@media screen and (min-width:769px){.header-bar{text-align:right;padding-top:8px;padding-bottom:8px}}.header-bar a,.header-bar button{color:#ecf6ed}@media screen and (min-width:769px){.header-bar__left{text-align:left;width:33.33%}.header-bar__center{text-align:center;width:33.33%}.header-bar__right{width:33.33%}}.header-bar__module{margin-bottom:15px}@media screen and (min-width:769px){.header-bar__module{display:inline-block;vertical-align:middle;text-align:left;margin-bottom:0}}.header-bar__module--list{list-style:none;margin:0}.header-bar__module--list li{display:inline-block;margin:0}.header-bar__module--list li+li{margin-left:6px}.cart-page-link{display:inline-block}.header-bar__cart-icon{font-size:1.4em;margin-right:4px}.hidden-count{display:none}.header-bar__sep{display:none}@media screen and (min-width:769px){.header-bar__sep{color:#ecf6ed;opacity:.4;display:inline-block;padding:0 10px}}.header-bar__search{position:relative;background-color:#fff;border:0 solid;border-radius:2px;min-width:300px}.header-bar__search:after{content:"";display:table;clear:both}@media screen and (min-width:769px){.header-bar__search{max-width:160px;margin-left:20px}.header-bar__search:first-of-type{margin-left:0}}@media screen and (max-width:768px){.header-bar__search{margin:12px 30px}}@media screen and (max-width:480px){.header-bar__search{margin:12px 15px}}.header-bar__search button,.header-bar__search form,.header-bar__search input{margin-bottom:0}.header-bar__search-input[type=search]{display:block;width:60%;float:right;background:0 0;border-color:transparent;padding:5px 0}.header-bar__search-submit{position:absolute;display:block;float:left;width:40%;font-size:16px;padding:4px 0;min-height:auto}.header-bar__search .btn{background:0 0;color:#555;max-width:40px}.announcement-bar--mobile{padding-top:5px;padding-bottom:5px}.mobile-cart-page-link,.mobile-nav-trigger{font-weight:900}.mobile-cart-page-link .icon,.mobile-nav-trigger .icon{position:relative;top:-1px;vertical-align:middle;padding-right:4px}.mobile-nav-trigger{display:block;float:left;background:0 0;border:0 none;padding:0;margin:0}.mobile-nav-trigger .icon{font-size:1.4em}.mobile-cart-page-link{display:block;float:right}.mobile-cart-page-link .header-bar__cart-icon{font-size:1.4em}.mobile-cart-page-link .cart-count:before{display:inline;content:"("}.mobile-cart-page-link .cart-count:after{display:inline;content:")"}.mobile-nav{display:none;list-style:none;text-align:left;margin:0}.mobile-nav li{margin:0}.mobile-nav__link{display:block;border-top:1px solid #ecf6ed;border-color:rgba(236,246,237,.2)}.mobile-nav__link>a{display:block;padding:12px 15px;font-size:.88235em;font-family:Montserrat,sans-serif;font-weight:500;font-style:normal;text-transform:uppercase}@media screen and (min-width:480px){.mobile-nav__link>a{padding-left:30px;padding-right:30px}}.mobile-nav__sublist-contract,.mobile-nav__sublist-expand{display:inline-block;font-size:.6em;vertical-align:middle;margin:-2px 0 0 4px}.mobile-nav__sublist-contract{display:none}.mobile-nav__sublist{list-style:none;margin:0;display:none;background-color:#fff}.mobile-nav__sublist-link a{display:block;padding:12px 15px;color:#014a05;font-size:.88235em;font-family:Montserrat,sans-serif;font-weight:500;font-style:normal;border-top:1px solid #ebebeb;padding-left:30px;padding-right:30px}
+  </style>
+  </head>
+ 
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ request.page_type | handle }}">
+<div itemprop="review" itemtype="http://schema.org/Review" itemscope>
+        <div itemprop="author" itemtype="http://schema.org/Person" itemscope>
+          <meta itemprop="name" content="Fred Benson" />
+        </div>
+        <div itemprop="reviewRating" itemtype="http://schema.org/Rating" itemscope>
+          <meta itemprop="ratingValue" content="4" />
+          <meta itemprop="bestRating" content="5" />
+        </div>
+      </div>
+      <div itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating" itemscope>
+        <meta itemprop="reviewCount" content="89" />
+        <meta itemprop="ratingValue" content="4.4" />
+      </div>
+  {% section 'header' %}
+
+  <main class="wrapper main-content" role="main">
+    <div class="grid">
+        <div class="grid__item">
+          {{ content_for_layout }}
+        </div>
+    </div>
+  </main>
+
+  {% section 'footer' %}
+
+  {%- if request.page_type == 'index' -%}
+    <p id="slideshow-info" class="visually-hidden" aria-hidden="true">
+      {{- 'home_page.slideshow.navigation_instructions' | t -}}
+    </p>
+  {%- endif -%}
+
+  {% if request.page_type == 'product' or request.page_type == 'index' %}
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  <ul hidden>
+    <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+    <li id="a11y-external-message">{{ 'general.accessibility.new_window' | t }}</li>
+    <li id="a11y-new-window-external-message">{{ 'general.accessibility.new_window_and_external' | t }}</li>
+  </ul>
+
+{% include 'swymSnippet' %}
+  
+  <!-- Items for Zero Waste Co mods ================================================== -->
+  <!--<script async="async" type="text/javascript" src="zerowasteco.js"></script>-->
+   {{ 'zerowasteco.js' | asset_url | script_tag }}
+  <!-- {{ 'zerowasteco.scss.liquid' | asset_url | stylesheet_tag }} -->
+
+  {% if shop.customer_accounts_enabled %}{% unless customer  %}<!-- {{ 'ndnapps-sociallogin-script.js' | asset_url | script_tag }} --> {% endunless %}{% endif %}
+
+
+{% if shop.metafields.qimify_minicart.script_src %}
+<script type="text/javascript" src="{{ shop.metafields.qimify_minicart.script_src }}&shop={{shop.permanent_domain }}" async="async"></script>
+{% endif %}
+
+  <script>
+  window.renderBadge = function() {
+    var ratingBadgeContainer = document.createElement("div");
+    document.body.appendChild(ratingBadgeContainer);
+    window.gapi.load('ratingbadge', function() {
+      window.gapi.ratingbadge.render(ratingBadgeContainer, {"merchant_id": 128369913});
+    });
+  }
+  </script>
+ 
+{% include 'magisto' %}
+
+
+<!-- spurit_sri-added -->
+{% render 'spurit_sri-theme-snippet' %}
+<!-- /spurit_sri-added -->
+
+  
+
+  {{ 'jquery-2.2.3.min.js' | asset_url | script_tag }}
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+<!-- Begin Shopify-Afterpay JavaScript Snippet (v1.0.8) -->
+<script type="text/javascript" async="async">
+// Overrides:
+// var afterpay_min = 0.04;            // As per your Afterpay contract.
+// var afterpay_max = 2000.00;         // As per your Afterpay contract.
+// var afterpay_cbt_enabled = false;   // As per your Afterpay contract; change to true to display Cross-Border Trade artwork (for AU/NZ).
+// var afterpay_logo_theme = 'colour'; // Can be 'colour', 'black' or 'white'.
+// var afterpay_product_selector = '#product-price-selector';
+// var afterpay_cart_integration_enabled = true;
+// var afterpay_cart_static_selector = '#cart-subtotal-selector';
+
+// Non-editable fields:
+var afterpay_shop_currency = {{ shop.currency | json }};
+var afterpay_cart_currency = {{ cart.currency.iso_code | json }};
+var afterpay_shop_money_format = {{ shop.money_format | json }};
+var afterpay_shop_permanent_domain = {{ shop.permanent_domain | json }};
+var afterpay_theme_name = {{ theme.name | json }};
+var afterpay_product = {{ product | json }};
+var afterpay_current_variant = {{ product.selected_or_first_available_variant | json }};
+var afterpay_cart_total_price = {{ cart.total_price | json }};
+var afterpay_js_snippet_version = '1.0.8';
+</script>
+<script type="text/javascript" src="https://static.afterpay.com/shopify-afterpay-javascript.js"></script>
+<!-- End Shopify-Afterpay JavaScript Snippet (v1.0.8) -->
+
+  
+  <!-- Header hook for plugins ================================================== -->
+  <!-- {{ content_for_header }} -->
+
+
+  {{ 'theme.js' | asset_url | script_tag }}
+  
+  
+
+  <!-- CSS ================================================== -->
+  {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  
+</body>
+</html>
